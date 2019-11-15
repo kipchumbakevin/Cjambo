@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+    <TextView
+        android:id="@+id/text_view_contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To numbers:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+        <Spinner
+            android:id="@+id/numbers"
+            android:layout_width="200dp"
+            android:layout_marginEnd="5dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/text_view_groups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To groups:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_contacts"/>
+        <Spinner
+            android:id="@+id/groups"
+            android:layout_below="@id/numbers"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numbers"/>
+        <EditText
+            android:id="@+id/edit_subject"
+            android:layout_below="@id/groups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textSize="14sp"
+            android:hint="subject"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/groups"/>
+        <EditText
+            android:background="@drawable/edittext"
+            android:layout_below="@id/edit_subject"
+            android:layout_width="match_parent"
+            android:hint="write message"
+            android:layout_marginTop="15dp"
+            android:textSize="14sp"
+            android:padding="3dp"
+            android:gravity="top"
+            android:layout_height="250dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_subject"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/buttonsend"
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+        android:text="Send"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
