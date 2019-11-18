@@ -75,6 +75,6 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
+    <include layout="@layout/content_progress_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

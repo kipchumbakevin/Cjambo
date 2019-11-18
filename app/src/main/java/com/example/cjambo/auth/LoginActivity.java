@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailUser,passwordpass;
     private static final String KEY_USERNAME = "email";
     private static final String KEY_STATUS = "status";
+    RelativeLayout progressLyt;
     private static final String KEY_MESSAGE = "message";
     private static final String login_url = "http://cjambo.ampleshelter.com/dashboard/databaseFiles/login.php";
 //    private com.example.cjambo.SessionHandler session;
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 //        }
         login = findViewById(R.id.login);
         emailUser = findViewById(R.id.email);
+        progressLyt = findViewById(R.id.progressLoad);
         passwordpass = findViewById(R.id.password);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +74,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void loginUser(final String email, final String password) {
+        showProgress();
         emailUser.getText().clear();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, login_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                hideProgress();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
@@ -99,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                hideProgress();
                 Toast.makeText(LoginActivity.this,"damn",Toast.LENGTH_SHORT).show();
             }
         })
@@ -113,5 +119,11 @@ public class LoginActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+    private void showProgress(){
+        progressLyt.setVisibility(View.VISIBLE);
+    }
+    private void hideProgress(){
+        progressLyt.setVisibility(View.GONE);
     }
 }

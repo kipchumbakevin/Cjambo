@@ -4,10 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp"
+    android:paddingTop="5dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.MainActivity"
     tools:showIn="@layout/app_bar_main">
+    <TextView
+        android:id="@+id/choose_recipient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Choose Recipients"/>
+    <TextView
+        android:id="@+id/choose_recipients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="90dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Choose Recipients"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tonumbers"
+        android:visibility="gone"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
     <TextView
         android:id="@+id/text_view_contacts"
         android:layout_width="wrap_content"
@@ -22,33 +50,43 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/togroups"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
     <TextView
         android:id="@+id/text_view_groups"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To groups:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_contacts"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="To groups:" />
         <Spinner
             android:id="@+id/groups"
-            android:layout_below="@id/numbers"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/numbers"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
         <EditText
             android:id="@+id/edit_subject"
-            android:layout_below="@id/groups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
+            android:layout_marginTop="60dp"
             android:textSize="14sp"
             android:hint="subject"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/groups"/>
+            app:layout_constraintTop_toTopOf="parent"/>
         <EditText
+            android:id="@+id/enter_message"
             android:background="@drawable/edittext"
             android:layout_below="@id/edit_subject"
             android:layout_width="match_parent"
@@ -61,6 +99,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_subject"/>
     <Button
+        android:id="@+id/send_message"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,5 +108,6 @@
         android:textColor="@color/colorWhite"
         android:textSize="12sp"
         android:text="Send"/>
+    <include layout="@layout/content_progress_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
