@@ -124,11 +124,21 @@ public class MainActivity extends AppCompatActivity
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String spin= tt();
-                String mess = message.getText().toString();
-                String sub = subject.getText().toString();
-                Toast.makeText(MainActivity.this,spin,Toast.LENGTH_LONG).show();
-                sendMessage(spin,mess,sub);
+                if (toNumbers.isShown() || toGroups.isShown()) {
+                    String spin = tt();
+                    String mess = message.getText().toString();
+                    String sub = subject.getText().toString();
+                    Toast.makeText(MainActivity.this, spin, Toast.LENGTH_LONG).show();
+                    sendMessage(spin, mess, sub);
+                }else if (toNumbers.isShown() && toGroups.isShown()){
+                    String num,grp,sub,msg;
+                    num = numbers.getSelectedItem().toString();
+                    grp = groups.getSelectedItem().toString();
+                    sub = subject.getText().toString();
+                    msg = message.getText().toString();
+                    Toast.makeText(MainActivity.this, num + grp, Toast.LENGTH_LONG).show();
+                    sendSms(num,grp,sub,msg);
+                }
             }
         });
 
@@ -151,11 +161,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void alert() {
-        TextView picknumbers,pickgroups;
+        TextView picknumbers,pickgroups,both;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         View view = getLayoutInflater().inflate(R.layout.recipients,null);
         picknumbers = view.findViewById(R.id.pickNumbers);
         pickgroups = view.findViewById(R.id.pickGroups);
+        both = view.findViewById(R.id.both);
         alertDialogBuilder.setView(view);
 
         final AlertDialog alertDialog = alertDialogBuilder.create();
@@ -179,6 +190,16 @@ public class MainActivity extends AppCompatActivity
                 chooseRecipients.setVisibility(View.GONE);
                 toNumbers.setVisibility(View.GONE);
                 toGroups.setVisibility(View.VISIBLE);
+            }
+        });
+        both.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                chooseRecipient.setVisibility(View.VISIBLE);
+                chooseRecipients.setVisibility(View.GONE);
+                toGroups.setVisibility(View.VISIBLE);
+                toNumbers.setVisibility(View.VISIBLE);
             }
         });
 
@@ -390,6 +411,53 @@ public class MainActivity extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>params = new HashMap<>();
                 params.put("recipient",spinnerText);
+                params.put("subject",subjectS);
+                params.put("message",messageM);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+    private void sendSms(final String groupP,final String numberN, final String subjectS, final String messageM) {
+        showProgress();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, contacts, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                hideProgress();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+                    String message = jsonObject.getString("message");
+                    if (success.equals("1")){
+
+                        Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this,"catch",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideProgress();
+                Toast.makeText(MainActivity.this,"damn",Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String>params = new HashMap<>();
+                params.put("number",numberN);
+                params.put("groups",groupP);
                 params.put("subject",subjectS);
                 params.put("message",messageM);
                 return params;
