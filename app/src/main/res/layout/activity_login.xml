@@ -10,7 +10,6 @@
 
 
     <ImageView
-        android:id="@+id/title"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
@@ -21,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="180dp"
@@ -30,51 +30,66 @@
         android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <EditText
-        android:background="@drawable/edittext"
-        android:id="@+id/email"
-        android:drawableStart="@drawable/ic_mail"
-        android:drawablePadding="5dp"
-        android:layout_marginTop="94dp"
-        android:inputType="textEmailAddress"
-        android:layout_marginStart="75dp"
-        android:hint="email"
-        android:textColorHint="@color/colorBlack"
-        android:textColor="@color/colorBlack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"/>
-    <EditText
-        android:drawableStart="@drawable/ic_lock"
-        android:inputType="textPassword"
-        android:drawablePadding="5dp"
-        android:layout_marginTop="122dp"
-        android:background="@drawable/edittext"
-        android:layout_marginStart="75dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        android:id="@+id/password"
-        android:textColorHint="@color/colorBlack"
-        android:hint="password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"/>
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="130dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginBottom="125dp"
-        android:background="@drawable/button"
-        android:text="Login"
-        android:textColor="@color/colorWhite"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="188dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/edittext"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="5dp"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="5dp"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="130dp"
+                android:background="@drawable/button"
+                android:text="Login"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
     <include layout="@layout/content_progress_bar"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
